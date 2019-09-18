@@ -57,7 +57,7 @@ class RemarryTwigFilterTwigExtension extends \Twig_Extension
      *
      * @return string
      */
-    public function reMarryOld($text = null, $numWords = null)
+    public function reMarryOldDoNotUse($text = null, $numWords = null)
     {
 
     	if(!$numWords) { $numWords = 2; }
@@ -74,8 +74,6 @@ class RemarryTwigFilterTwigExtension extends \Twig_Extension
 				for ($i = $elements->length - 1; $i >= 0; $i --) {
 					$liveElement = $elements->item($i);
 					$updatedValue = $this->str_lreplace(' ', "&nbsp;", trim($liveElement->nodeValue), $numWords);
-					//$rpElement = $dom->createElement($tag, $updatedValue);
-					//$liveElement->parentNode->replaceChild($rpElement, $liveElement);
 					$liveElement->nodeValue = "";
 					$liveElement->nodeValue = $updatedValue;
 				}
@@ -108,6 +106,9 @@ class RemarryTwigFilterTwigExtension extends \Twig_Extension
 		return $html;
 	}
 
+
+	// todo - Handle baisc strings with possible sub html elementms
+	// currently only works with plan strings or full html document.
     public function reMarry($text = null, $numWords = null)
     {
 
@@ -116,20 +117,24 @@ class RemarryTwigFilterTwigExtension extends \Twig_Extension
 
     	if(strip_tags($text) != $text) {
 
-			//$tags = ['p', 'li', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
 			$dom = new \DOMDocument;
 			@$dom->loadHTML('<body>' . mb_convert_encoding($text, 'HTML-ENTITIES', 'UTF-8') . '</body>', LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
 			
 			$rootElements = [];
 			
 			foreach ($dom->documentElement->childNodes as $node) {
-				
+
+				// get root child element node
 				$html = $this->innerHTML($node);
 
+				// log all html tags by index.
 				preg_match_all('/<\/?\w+((\s+\w+(\s*=\s*(?:".*?"|\'.*?\'|[\^\'">\s]+))?)+\s*|\s*)\/?\s*>*>/', $html, $matches);
 				
 				$matches = $matches[0];
 				
+				
+				// replace tags with placeholders
+				// we do this to remove spaces within tags from the equation later on.
 				foreach($matches as $idx => $match) {
 					$html = preg_replace('/' . preg_quote($match, '/') . '/', '||TAG' . $idx . '||', $html, 1);
 				}
@@ -140,11 +145,12 @@ class RemarryTwigFilterTwigExtension extends \Twig_Extension
 				// replace last X spaces with non-breaking spaces
 				$result = $this->str_lreplace(' ', "&nbsp;", trim($html), $numWords);
 				
-				// replace matches with tags
+				// replace placeholders with corresponding tags
 				foreach($matches as $idx => $match) {
 					$result = str_replace('||TAG' . $idx . '||', $match, $result);
 				}
 				
+				// get root element attributes string
 				$attributes = [];
 				foreach($node->attributes as $attr) {
 					$attributes[] = $attr->nodeName . "=\"{$attr->nodeValue}\"";
@@ -154,10 +160,11 @@ class RemarryTwigFilterTwigExtension extends \Twig_Extension
 					$attr = " " . implode(" ", $attributes);
 				}
 
-				// replace html in node
+				// replace html in node and prep for return
 				$rootElements[] = "<" . $node->tagName . $attr . ">" . $result . "</" . $node->tagName . ">";
 			}
 			
+			// join update root element htmls.
 			$result = implode("", $rootElements);
 			
 			
