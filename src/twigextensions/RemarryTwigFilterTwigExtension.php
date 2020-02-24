@@ -158,6 +158,8 @@ class RemarryTwigFilterTwigExtension extends \Twig_Extension
 				
 				if(sizeof($attributes)) {
 					$attr = " " . implode(" ", $attributes);
+				} else {
+					$attr = "";
 				}
 
 				// replace html in node and prep for return
