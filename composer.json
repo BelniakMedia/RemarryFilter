@@ -2,7 +2,7 @@
     "name": "belniakmedia/remarry-twig-filter",
     "description": "Replaces the space character with a non-breaking space between the last to words of the given content.",
     "type": "craft-plugin",
-    "version": "1.1",
+    "version": "1.2",
     "keywords": [
         "craft",
         "cms",
