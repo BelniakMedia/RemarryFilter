@@ -106,12 +106,14 @@ class RemarryTwigFilterTwigExtension extends \Twig_Extension
 			$fragment->appendChild($element->firstChild);
 		}
 		$html = $element->ownerDocument->saveHTML($fragment);
-		$element->appendChild($fragment);
+		if($fragment->hasChildNodes()) {
+			$element->appendChild($fragment);
+		}
 		return $html;
 	}
 
 
-	// todo - Handle baisc strings with possible sub html elementms
+	// todo - Handle basic strings with possible sub html elementms
 	// currently only works with plan strings or full html document.
 	public function reMarry($text = null, $numWords = null)
 	{
