@@ -18,6 +18,7 @@
         }
     ],
     "require": {
+        "php": ">=7.4",
         "craftcms/cms": "~3.1",
         "ext-dom": "*",
         "ext-mbstring": "*",
