@@ -10,19 +10,19 @@
 
 namespace belniakmedia\remarrytwigfilter\twigextensions;
 
-use belniakmedia\remarrytwigfilter\RemarryTwigFilter;
-use Craft;
 use DOMDocument;
 use DOMNode;
 use DOMText;
 use Exception;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFilter;
 
 /**
  * @author    Belniak Media Inc.
  * @package   RemarryTwigFilter
  * @since     1.0.0
  */
-class RemarryTwigFilterTwigExtension extends \Twig_Extension
+class RemarryTwigFilterTwigExtension extends AbstractExtension
 {
 
 	private DOMDocument $dom;
@@ -37,7 +37,7 @@ class RemarryTwigFilterTwigExtension extends \Twig_Extension
 
 	// We treat <br> similar to a block level element, add br to inline override to disable.
 	// The system does not parse CSS so if you have a block level element behaving
-	// as an inline element and you want it processed as such, you'll need to use the override
+	// as an inline element, and you want it processed as such, you'll need to use the override
 	// setting to add that element tag name to this list.
 
 	private $inlineElements = [
@@ -115,7 +115,7 @@ class RemarryTwigFilterTwigExtension extends \Twig_Extension
 	public function getFilters()
 	{
 		return [
-			new \Twig_SimpleFilter('remarry', [$this, 'reMarry'], ['pre_escape' => 'html', 'is_safe' => array('html')]),
+			new TwigFilter('remarry', [$this, 'reMarry'], ['pre_escape' => 'html', 'is_safe' => array('html')]),
 		];
 	}
 
