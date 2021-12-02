@@ -215,34 +215,33 @@ class RemarryTwigFilterTwigExtension extends AbstractExtension
 	 *
 	 * @param string $content The content the filter is being run on
 	 *
-	 * @param int|array $optsOrNumWords An associative array with options or an INT number of words. Remaining parameters
+	 * @param int|array $optsOrNumWords An associative array with options or an (int)number of words. Remaining parameters
 	 * 									are ignored when option array is provided. Otherwise, number of words cannot be
 	 * 									less than 2, and will be forced to 2 if a number lower is provided.
 	 *
-	 * @param bool $preventHyphenBreaks Whether to wrap hyphenated words within the protection zone of actionable content.
+	 * Valid options for $optsOrNumWords as options[]
+	 * int		  'numWords' 				Number of words to bind. A minimum value of 2 is enforced.
+	 * boolean	  'preventHyphenBreaks' 	Whether to wrap hyphenated words within the protection zone of actionable content.
+	 * int 		  'minimumWordCount'		Minimum number of words required in text content for processing to occur.
+	 * boolean    'removeExtraSpaces'		It is recommended this be left on but can be turned off if needed. Will trim white
+	 * 								    	space from the beginning and ending of actionable text collections, and also
+	 * 								    	replace one or more consecutive white space characters with a single space before
+	 * array|null 'overrideInlineElements'	An Array of element tag names to override the internal inline element list with.
+	 * array|null 'overrideIgnoredElements' An Array of element tag names to override the internal ignored inline element list with.
 	 *
-	 * @param int $minimumWordCount Minimum number of words required in text content for processing to occur.
+	 * Default Options:
+	 * 	[
+	 * 		'numWords' => 2,
+	 *		'preventHyphenBreaks' => true,
+	 *		'minimumWordCount' => 4,
+	 *		'removeExtraSpaces' => true,
+	 *		'overrideInlineElements' => null,
+	 *		'overrideIgnoredElements' => null,
+	 *	]
 	 *
-	 * @param bool $removeExtraSpaces It is recommended this be left on but can be turned off if needed. Will trim white
-	 * 								  space from the beginning and ending of actionable text collections, and also
-	 * 								  replace one or more consecutive white space characters with a single space before
-	 * 								  processing the content.
-	 *
-	 * @param array|null $overrideInlineElements An Array of element tag names to override the internal inline element
-	 * 											 list with.
-	 *
-	 * @param array|null $overrideIgnoredElements An Array of element tag names to override the internal ignored inline
-	 * 											  element list with.
 	 * @return string
 	 */
-	public function remarry(
-		string $content = "",
-		$optsOrNumWords = 2,
-		bool $preventHyphenBreaks = true,
-		int $minimumWordCount = 4,
-		bool $removeExtraSpaces = true,
-		array $overrideInlineElements = null,
-		array $overrideIgnoredElements = null): string
+	public function remarry(string $content = "", $optsOrNumWords = 2): string
 	{
 
 		// Set default options
@@ -260,15 +259,11 @@ class RemarryTwigFilterTwigExtension extends AbstractExtension
 		if(is_array($optsOrNumWords)) {
 			$options = array_merge($defaultOptions, $optsOrNumWords);
 		} else {
-			$options = [
-				'numWords' => $optsOrNumWords,
-				'preventHyphenBreaks' => $preventHyphenBreaks,
-				'minimumWordCount' => $minimumWordCount,
-				'removeExtraSpaces' => $removeExtraSpaces,
-				'overrideInlineElements' => $overrideInlineElements,
-				'overrideIgnoredElements' => $overrideIgnoredElements,
-			];
+			$options = array_merge($defaultOptions, ['numWords' => $optsOrNumWords]);
 		}
+
+		// Enforce two word minimum
+		if($options['numWords'] < 2) { $options['numWords'] = 2; }
 
 		// Set options as class properties
 		$this->numWords = $options['numWords'];
@@ -640,6 +635,9 @@ class RemarryTwigFilterTwigExtension extends AbstractExtension
 					// Explode all words into an array for counting and processing.
 					$words = preg_split('/\s/', $text);
 
+					// Convert empty word elements to spaces
+					foreach($words as $k => $v) { if($v === "") { $words[$k] = " "; }}
+
 					// Based on the number of words to keep together (specified by $replacementsRemaining), subtract
 					// $replacementsRemaining from the number of words to get the index of which to start replacing
 					// spaces with non-breaking spaces. We add + 1 to the index due to the way splice indexing works.
@@ -651,7 +649,7 @@ class RemarryTwigFilterTwigExtension extends AbstractExtension
 					}
 
 					// Get base text up to the first position where non-breaking spaces are to be added.
-					$base_text = implode(' ', array_splice($words, 0, $protectionStart, []));
+					$base_text = implode(' ', array_splice($words, 0, $protectionStart));
 
 					// Remaining "words" are to be appended with entity reference elements proceeding each word rather than a space.
 					// We are going to add the new nodes to an array and then compile the dom fragment at the end because we need
@@ -771,10 +769,10 @@ class RemarryTwigFilterTwigExtension extends AbstractExtension
 				// Get the text value of the node.
 				$text = $node->nodeValue;
 
-				// Remove multiple spaces (if allowed)
-				if($this->removeExtraSpaces) {
-					$text = preg_replace('/\s+/', ' ', $text);
-				}
+				// Trim and remove multiple spaces (even if normally not allowed)
+				// since the only purpose of this function is to count the words. Extra spaces will cause the word
+				// count to be wrong.
+				$text = trim(preg_replace('/\s+/', ' ', $text));
 
 				// Add all words in text to the word list.
 				$words = array_merge($words, explode(' ', $text));
