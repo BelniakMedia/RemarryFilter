@@ -30,7 +30,7 @@
         }
     },
     "extra": {
-        "name": "Remarry Twig Filter",
+        "name": "remarry Twig Filter",
         "handle": "remarry-twig-filter",
         "class": "belniakmedia\\remarrytwigfilter\\RemarryTwigFilter"
     }

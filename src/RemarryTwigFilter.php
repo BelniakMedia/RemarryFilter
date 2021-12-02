@@ -1,10 +1,10 @@
 <?php
 /**
- * Remarry Twig Filter plugin for Craft CMS 3.x
+ * remarry Twig Filter plugin for Craft CMS 3.x
  *
  * Replaces the space character with a non-breaking space between the last to words of the given content.
  *
- * @link      http://www.belniakmedia.com
+ * @link      https://www.belniakmedia.com
  * @copyright Copyright (c) 2017 Belniak Media Inc.
  */
 
@@ -24,7 +24,7 @@ use yii\base\Event;
  *
  * @author    Belniak Media Inc.
  * @package   RemarryTwigFilter
- * @since     1.0.0
+ * @since     2.0.0
  *
  */
 class RemarryTwigFilter extends Plugin
@@ -33,9 +33,9 @@ class RemarryTwigFilter extends Plugin
     // =========================================================================
 
     /**
-     * @var RemarryTwigFilter
+     * @var RemarryTwigFilter $plugin
      */
-    public static $plugin;
+    public static RemarryTwigFilter $plugin;
 
     // Public Methods
     // =========================================================================

@@ -1,6 +1,6 @@
 
 ![Plugin Icon](src/icon.svg)
-# Remarry Twig Filter plugin for Craft CMS 3.x
+# remarry Twig Filter plugin for Craft CMS 3.x
 ## Version 2.0.0
 
 **NOTE: If you happen to be using a 1.x version of this plugin I highly recommend that upgrade to the 2.x version. It _SHOULD_ be completely backwards compatible, and it has been completely rewritten. It is now much more robust and polished for public consumption.**
@@ -135,7 +135,7 @@ This would result in `inlineElements` being set to the curated inline element li
 ```
 remarryRemElement(array $elements, $elementList): array
 ```
-_See `remarryAddElement` definition above as this function works exactly the same way but removes an element rather than adds one and the function's name is slightly different.
+_See `remarryAddElement` definition_ above as this function works exactly the same way but removes an element rather than adds one and the function's name is slightly different.
 
 ## `<br>` Tag Special Handling Details
 By default, this plugin treats `<br>` tags like `block` level elements in that all buffered `DOMText` nodes and `DOMElement` nodes matching the curated inline elements list are processed as collection once a `<br>` tag is encountered. The only difference is that unlike `block` level elements, the `<br>` elements are not traversed since they have no child nodes or content. The `<br>` tag is maintained in the output. This means that the following HTML would be processed in the following manner:

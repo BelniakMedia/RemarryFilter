@@ -1,8 +1,17 @@
-# Remarry Twig Filter Changelog
+# remarry Twig Filter Changelog
 
 All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
+
+## 2.0.0 - 2021-12-01
+### Added
+- Complete rework of the plugin.
+  - Filter parameter for `numWords` now also accepts a settings object.
+  - Works with basic text and html documents.
+  - Works with complex HTML and fully traverses the dom try applying widow protections not just to individual text nodes, but intelligently builds collections of text nodes and inline elements to smartly add non-breaking spaces everywhere you want them and nowhere that you don't.
+  - See README for full feature list and documentation.
+- Updated plugin icon.
 
 ## 1.3 - 2021-04-30
 ### Fixed
