@@ -3,7 +3,7 @@
 # remarry Twig Filter plugin for Craft CMS 3.x
 ## Version 2.0.0
 
-**NOTE: If you happen to be using a 1.x version of this plugin I highly recommend that upgrade to the 2.x version. It _SHOULD_ be completely backwards compatible, and it has been completely rewritten. It is now much more robust and polished for public consumption.**
+**NOTE: If you happen to be using a 1.x version of this plugin I highly recommend that you upgrade to the 2.x version. It _SHOULD_ be completely backwards compatible, and it has been completely rewritten. It is now much more robust and polished for public consumption.**
 
 ## Install Instructions
 

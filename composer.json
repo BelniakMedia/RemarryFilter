@@ -1,6 +1,6 @@
 {
     "name": "belniakmedia/remarry-twig-filter",
-    "description": "Prevents paragraph text widows for plain text and HTML with full document traversal support.",
+    "description": "A CraftCMS Twig Filter that prevents paragraph text widows in plain text and complex HTML user supplied content.",
     "type": "craft-plugin",
     "version": "2.0.0",
     "license": "MIT",
