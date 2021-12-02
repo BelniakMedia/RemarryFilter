@@ -1,35 +1,29 @@
 {
     "name": "belniakmedia/remarry-twig-filter",
-    "description": "Replaces the space character with a non-breaking space between the last to words of the given content.",
+    "description": "Prevents paragraph text widows for plain text and HTML with full document traversal support.",
     "type": "craft-plugin",
-    "version": "2.0.00",
-    "keywords": [
-        "craft",
-        "cms",
-        "craftcms",
-        "craft-plugin",
-        "remarry twig filter"
-    ],
+    "version": "2.0.0",
     "license": "MIT",
+    "keywords": ["craft", "cms", "craftcms", "craft-plugin", "widow", "orphan", "remarry twig filter"],
     "authors": [
         {
-            "name": "Belniak Media Inc.",
-            "homepage": "http://www.belniakmedia.com"
+            "name": "Rick Kukiela of Belniak Media Inc.",
+            "homepage": "https://www.belniakmedia.com"
         }
     ],
+    "support": {
+        "email": "rick@belniakmedia.com",
+        "issues": "https://github.com/BelniakMedia/RemarryFilter/issues",
+        "source": "https://github.com/BelniakMedia/RemarryFilter",
+        "docs": "https://github.com/BelniakMedia/RemarryFilter/blob/master/README.md"
+    },
     "require": {
         "php": ">=7.4",
-        "craftcms/cms": "~3.1",
+        "craftcms/cms": "^3.1.0",
         "ext-dom": "*",
         "ext-mbstring": "*",
         "ext-libxml": "*"
     },
-    "repositories": [
-        {
-            "type": "composer",
-            "url": "https://asset-packagist.org"
-        }
-    ],
     "autoload": {
         "psr-4": {
           "belniakmedia\\remarrytwigfilter\\": "src/"
@@ -38,9 +32,6 @@
     "extra": {
         "name": "Remarry Twig Filter",
         "handle": "remarry-twig-filter",
-        "hasCpSettings": false,
-        "hasCpSection": false,
-        "changelogUrl": "???",
         "class": "belniakmedia\\remarrytwigfilter\\RemarryTwigFilter"
     }
 }

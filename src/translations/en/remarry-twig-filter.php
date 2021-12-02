@@ -11,7 +11,7 @@
 /**
  * @author    Belniak Media Inc.
  * @package   RemarryTwigFilter
- * @since     1.0.0
+ * @since     2.0.0
  */
 return [
     'Remarry Twig Filter plugin loaded' => 'Remarry Twig Filter plugin loaded',

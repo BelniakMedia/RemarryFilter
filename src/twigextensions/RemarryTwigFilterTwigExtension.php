@@ -22,7 +22,7 @@ use Twig\TwigFunction;
 /**
  * @author    Belniak Media Inc.
  * @package   RemarryTwigFilter
- * @since     1.1.0
+ * @since     2.0.0
  */
 class RemarryTwigFilterTwigExtension extends AbstractExtension
 {
@@ -107,7 +107,6 @@ class RemarryTwigFilterTwigExtension extends AbstractExtension
 		'sub',
 		'sup',
 		'svg',
-		'template',
 		'textarea',
 		'track',
 		'video',

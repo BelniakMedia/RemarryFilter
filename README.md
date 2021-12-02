@@ -1,3 +1,5 @@
+
+![Plugin Icon](src/icon.svg)
 # Remarry Twig Filter plugin for Craft CMS 3.x
 ## Version 2.0.0
 
@@ -186,7 +188,7 @@ The curated list of inline elements was derived from the [MDN Article on HTML In
 ]`
 
 ## Included Curated Ignored Inline Element List
-The curated list of ignored inline elements was derived from the [MDN Article on HTML Elements](https://developer.mozilla.org/en-US/docs/Web/HTML/Inline_elements).
+The curated list of ignored inline elements was derived from the [MDN Article on HTML Inline Elements](https://developer.mozilla.org/en-US/docs/Web/HTML/Inline_elements).
 
 `[
 'audio',
@@ -210,7 +212,6 @@ The curated list of ignored inline elements was derived from the [MDN Article on
 'sub',
 'sup',
 'svg',
-'template',
 'textarea',
 'track',
 'video',
@@ -229,7 +230,7 @@ The curated list of ignored inline elements was derived from the [MDN Article on
 #### Why should I care about this?
 - Another great question. However, I don't really have a great answer. You are here though, so maybe you care a little? Basically it's just more pleasing to the eye and your websites will look more professional and clean if you don't have a bunch of paragraph widows throughout.
 
-#### How does this "Fix" paragraph widows?
+#### How do you "Fix" paragraph widows?
 - The way you can prevent paragraph widows is by replacing the space between the last two words of every paragraph and some headlines with a non-breaking space entity `&nbsp;`. This is easy enough to do when you're working with statically programmed content. You just have to remember to do it.
 
 #### Why do I need this plugin then?
