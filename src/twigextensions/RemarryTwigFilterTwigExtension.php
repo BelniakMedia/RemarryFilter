@@ -212,7 +212,7 @@ class RemarryTwigFilterTwigExtension extends AbstractExtension
 	 * plain text value passed in, or if HTML is passed in, a group of concurrent text nodes and inline elements where
 	 * the combined text content has more words than the $minimumWordCount setting.
 	 *
-	 * @param string $content The content the filter is being run on
+	 * @param mixed $content The content the filter is being run on
 	 *
 	 * @param int|array $optsOrNumWords An associative array with options or an (int)number of words. Remaining parameters
 	 * 									are ignored when option array is provided. Otherwise, number of words cannot be
@@ -238,10 +238,15 @@ class RemarryTwigFilterTwigExtension extends AbstractExtension
 	 *		'overrideIgnoredElements' => null,
 	 *	]
 	 *
-	 * @return string
+	 * @return mixed
 	 */
-	public function remarry(string $content = "", $optsOrNumWords = 2): string
+	public function remarry($content, $optsOrNumWords = 2): string
 	{
+
+		// Ensure string is passed in.
+		if(!is_string($content)) {
+			return $content;
+		}
 
 		// Set default options
 		$defaultOptions = [
