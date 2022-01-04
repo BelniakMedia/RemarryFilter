@@ -240,8 +240,13 @@ class RemarryTwigFilterTwigExtension extends AbstractExtension
 	 *
 	 * @return string
 	 */
-	public function remarry(string $content = "", $optsOrNumWords = 2): string
+	public function remarry($content = "", $optsOrNumWords = 2): string
 	{
+
+		// Ensure string is passed in.
+		if(!is_string($content)) {
+			$content = "";
+		}
 
 		// Set default options
 		$defaultOptions = [
