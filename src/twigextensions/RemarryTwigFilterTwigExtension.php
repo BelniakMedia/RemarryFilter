@@ -240,7 +240,7 @@ class RemarryTwigFilterTwigExtension extends AbstractExtension
 	 *
 	 * @return mixed
 	 */
-	public function remarry($content, $optsOrNumWords = 2): string
+	public function remarry($content, $optsOrNumWords = 2)
 	{
 
 		// Ensure string is passed in.
