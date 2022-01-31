@@ -149,7 +149,7 @@ class RemarryTwigFilterTwigExtension extends AbstractExtension
 	 * @return array
 	 * @noinspection DuplicatedCode
 	 */
-	public function addInline(array $elements, $elementList): array
+	public function addElement(array $elements, $elementList): array
 	{
 		// Validate $elements, make sure it has content.
 		if(!sizeof($elements)) {
@@ -182,7 +182,7 @@ class RemarryTwigFilterTwigExtension extends AbstractExtension
 	 * @throws Exception
 	 * @noinspection DuplicatedCode
 	 */
-	public function rmInline(array $elements, $elementList = null): array
+	public function remElement(array $elements, $elementList = null): array
 	{
 
 		// Validate $elements, make sure it has content.
