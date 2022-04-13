@@ -294,7 +294,8 @@ class RemarryTwigFilterTwigExtension extends AbstractExtension
 			$documentElement = $this->processChildNodes($this->dom->documentElement);
 
 			// Get the processed HTML to be returned
-			$result = $this->dom->saveHTML($documentElement);
+			$html = $this->dom->saveHTML($documentElement);
+			$result = substr(substr($html, 6), 0, -7);
 
 		} else {
 
