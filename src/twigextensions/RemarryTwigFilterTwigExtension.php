@@ -243,9 +243,9 @@ class RemarryTwigFilterTwigExtension extends AbstractExtension
 	public function remarry($content, $optsOrNumWords = 2)
 	{
 
-		// Ensure string is passed in.
+		// Ensure string is passed in. If not, hope the object has a good __toString() method implemented...
 		if(!is_string($content)) {
-			return $content;
+			$content = (string)$content;
 		}
 
 		// Set default options

@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## 2.0.4 - 2022-04-27
+### Fixed
+- Fixed a bug where redactor (and possibly other field types) were passing in an object as the `$content` rather than the expected text/html string. The code now will attempt to cast any non-string `$content` passed in to a string. As long as the field object has a good `__toString()` implementation then it works correctly. Unexpected results may occur if you use this with a field type that does not provide the desired output when cast to a string. Note that redactor field type does work correcly with this implementation now.
+
 ## 2.0.3 - 2022-04-13
 ### Fixed
 - Fixed a bug where a `<body>` tag was wrapping the output when processing HTML strings.
