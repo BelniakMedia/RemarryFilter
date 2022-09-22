@@ -1,6 +1,6 @@
 <?php
 /**
- * Remarry Twig Filter plugin for Craft CMS 3.x
+ * Remarry Twig Filter plugin for Craft CMS 4.x
  *
  * Replaces the space character with a non-breaking space between the last N words of the given content.
  *
