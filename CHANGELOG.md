@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## 2.1.1 - 2023-02-24
+### Fixed
+- Fixed bug where calls to `DomElement::appendChild(childNode)` while iterating over `DomElement::childNodes` would mutate the node list being iterated. This could sometimes cause the remaining dom elements in the original child node list to be skipped. This had the potential to resulting in lost content. We now call `cloneNode()` on the `childNode` reference, inside the loop, prior to processing it.
+
 ## 2.1.0 - 2022-09-22
 ### Updated
 - Updated plugin meta data for Craft 4.0 support / requirements.
@@ -46,7 +50,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ## 1.1 - 2020-02-24
 ### Fixed
-- Fix to attribute hundling for HTML tags where $attr was not being set in some scenarios causing an error.
+- Fix to attribute handling for HTML tags where $attr was not being set in some scenarios causing an error.
 
 ## 1.0.0 - 2017-12-04
 ### Added

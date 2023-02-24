@@ -2,7 +2,7 @@
     "name": "belniakmedia/remarry-twig-filter",
     "description": "A CraftCMS Twig Filter that prevents paragraph text widows in plain text and complex HTML user supplied content.",
     "type": "craft-plugin",
-    "version": "2.1.0",
+    "version": "2.1.1",
     "license": "MIT",
     "keywords": ["craft", "cms", "craftcms", "craft-plugin", "widow", "orphan", "remarry twig filter"],
     "authors": [

@@ -394,9 +394,12 @@ class RemarryTwigFilterTwigExtension extends AbstractExtension
 		$newElement = $element->cloneNode(false);
 		$buffer = [];
 
-		foreach ($element->childNodes as $childNode) {
+        foreach ($element->childNodes as $childNodeRef) {
 
-			// Guard clause to immediately buffer DOMText elements and elements listed in the $ignoredInlineElements
+            // Make clone of childNodeRef to prevent `appendChild` from mutating the loop while iterating it...
+            $childNode = $childNodeRef->cloneNode(true);
+
+            // Guard clause to immediately buffer DOMText elements and elements listed in the $ignoredInlineElements
 			// array and continue
 			if($childNode instanceof DOMText || in_array($childNode->nodeName, $this->ignoredInlineElements)) {
 				$buffer[] = $childNode;
